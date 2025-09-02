@@ -26,8 +26,9 @@ public class LoginPage {
     public void enterPassword(String password) {
         this.password.sendKeys(password);
     }
-    public void clickLoginButton() {
+    public ShopPage clickLoginButton() {
         this.loginButton.click();
+        return new ShopPage(driver);
     }
 
 }
