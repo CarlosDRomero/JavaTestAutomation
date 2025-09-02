@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Sauce Suite">
+    <test name="login">
+        <parameter name="userName"  value="standard_user"/>
+        <parameter name="password" value="secret_sauce"/>
+        <classes>
+            <class name="test.automation.tests.LoginSteps"/>
+        </classes>
+    </test>
+</suite>
