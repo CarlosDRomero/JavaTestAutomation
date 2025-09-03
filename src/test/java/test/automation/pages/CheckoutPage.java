@@ -27,17 +27,25 @@ public class CheckoutPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void enterFirstName(String firstName) {
+    public CheckoutPage enterFirstName(String firstName) {
         this.firstName.sendKeys(firstName);
+
+        return this;
     }
-    public void enterLastName(String lastName) {
+    public CheckoutPage enterLastName(String lastName) {
         this.lastName.sendKeys(lastName);
+
+        return this;
     }
-    public void enterPostalCode(String postalCode) {
+    public CheckoutPage enterPostalCode(String postalCode) {
         this.postalCode.sendKeys(postalCode);
+
+        return this;
     }
-    public void clickContinueButton() {
+    public CheckoutPage clickContinueButton() {
         continueButton.click();
+
+        return this;
     }
     public CheckoutCompletePage finishCheckout() {
         finishButton.click();

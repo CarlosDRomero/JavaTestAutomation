@@ -16,8 +16,9 @@ import java.util.Map;
 public class LoginSteps {
     WebDriver driver;
     LoginPage loginPage;
+    @Parameters({"URL"})
     @BeforeMethod
-    public void beforeMethod() {
+    public void beforeMethod(String URL) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
@@ -31,26 +32,43 @@ public class LoginSteps {
 
         driver = new ChromeDriver(options);
 
-        driver.get("https://www.saucedemo.com/");
+        driver.get(URL);
         loginPage = new LoginPage(driver);
         driver.manage().window().maximize();
     }
+
     @Parameters({"userName", "password"})
     @Test
     public void login(String userName, String password) {
         // TODO: Add waits
-        loginPage.enterUserName(userName);
-        loginPage.enterPassword(password);
-        ShopPage shopPage = loginPage.clickLoginButton();
-        shopPage.addRandomProduct();
-        ShoppingCartPage shoppingCartPage = shopPage.clickShoppingCartButton();
-        CheckoutPage checkoutPage = shoppingCartPage.clickCheckoutButton();
-        checkoutPage.enterFirstName("Jose");
-        checkoutPage.enterLastName("Escamilla");
-        checkoutPage.enterPostalCode("12345");
-        checkoutPage.clickContinueButton();
-        CheckoutCompletePage checkoutCompletePage = checkoutPage.finishCheckout();
-        Assert.assertTrue(checkoutCompletePage.getCompleteHeaderText().contains("Thank you for your order!"));
+//        loginPage.enterUserName(userName);
+//        loginPage.enterPassword(password);
+//        ShopPage shopPage = loginPage.clickLoginButton();
+//        shopPage.addRandomProduct();
+//        ShoppingCartPage shoppingCartPage = shopPage.clickShoppingCartButton();
+//        CheckoutPage checkoutPage = shoppingCartPage.clickCheckoutButton();
+//        checkoutPage.enterFirstName("Jose");
+//        checkoutPage.enterLastName("Escamilla");
+//        checkoutPage.enterPostalCode("12345");
+//        checkoutPage.clickContinueButton();
+//        CheckoutCompletePage checkoutCompletePage = checkoutPage.finishCheckout();
+//        Assert.assertTrue(checkoutCompletePage.getCompleteHeaderText().contains("Thank you for your order!"));
+
+        Assert.assertTrue(
+            loginPage.login(userName, password)
+                    .addRandomProduct()
+                    .clickShoppingCartButton()
+                    .clickCheckoutButton()
+                    .enterFirstName("Jose")
+                    .enterLastName("Escamilla")
+                    .enterPostalCode("12345")
+                    .clickContinueButton()
+                    .finishCheckout()
+                    .getCompleteHeaderText()
+                    .contains("Thank you for your order!")
+
+        );
+
     }
 
 }

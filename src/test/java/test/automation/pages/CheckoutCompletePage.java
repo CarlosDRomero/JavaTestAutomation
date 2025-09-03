@@ -18,7 +18,8 @@ public class CheckoutCompletePage {
     public String getCompleteHeaderText() {
         return completeHeader.getText();
     }
-    public void clickBackToProducts() {
+    public ShopPage clickBackToProducts() {
         backToProducts.click();
+        return new ShopPage(driver);
     }
 }

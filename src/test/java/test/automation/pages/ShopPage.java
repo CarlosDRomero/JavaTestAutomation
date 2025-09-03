@@ -18,12 +18,16 @@ public class ShopPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void clickAddToCartButton(int i) {
+    public ShopPage clickAddToCartButton(int i) {
         addToCartButtons.get(i).click();
+
+        return this;
     }
-    public void addRandomProduct(){
+    public ShopPage addRandomProduct(){
         int i = (int) (Math.random() * addToCartButtons.size());
         clickAddToCartButton(i);
+
+        return this;
     }
 
     public ShoppingCartPage clickShoppingCartButton() {
