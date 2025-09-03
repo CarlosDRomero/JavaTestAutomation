@@ -4,9 +4,17 @@
     <parameter name="userName"  value="standard_user"/>
     <parameter name="password" value="secret_sauce"/>
 
-    <test name="login">
+    <test name="Sauce Tests">
         <classes>
-            <class name="test.automation.tests.LoginSteps"/>
+            <class name="test.automation.tests.SauceTests">
+                <methods>
+                    <include name="buyFlow">
+                        <parameter name="firstName"  value="Jose"/>
+                        <parameter name="lastName" value="Escamilla"/>
+                        <parameter name="postalCode" value="12345"/>
+                    </include>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
