@@ -13,6 +13,7 @@
                         <parameter name="lastName" value="Escamilla"/>
                         <parameter name="postalCode" value="12345"/>
                     </include>
+                    <include name="removeFromShoppingCart"/>
                 </methods>
             </class>
         </classes>

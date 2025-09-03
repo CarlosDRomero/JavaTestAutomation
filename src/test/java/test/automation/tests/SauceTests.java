@@ -70,5 +70,20 @@ public class SauceTests {
         );
 
     }
+    @Test(testName = "Remove from shopping cart")
+    public void removeFromShoppingCart() {
+        // First, I check if there are 6 elements on the shop
+        Assert.assertEquals(shopPage.getInventorySize(), 6);
+        shopPage.clickAddToCartButton(2)
+                .clickAddToCartButton(4)
+                .clickAddToCartButton(0);
+
+        Assert.assertEquals(shopPage.getShoppingCartCount(), 3);
+        // Then click the same buttons again to remove from cart
+        shopPage.clickAddToCartButton(2)
+                .clickAddToCartButton(4)
+                .clickAddToCartButton(0);
+        Assert.assertEquals(shopPage.getShoppingCartCount(), 0);
+    }
 
 }
