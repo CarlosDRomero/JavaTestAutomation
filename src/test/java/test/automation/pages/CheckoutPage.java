@@ -17,6 +17,10 @@ public class CheckoutPage {
     WebElement postalCode;
     @FindBy(id = "continue")
     WebElement continueButton;
+    @FindBy(id = "finish")
+    // NOTE: Finish is at the Second Checkout Step page, but, because I'm using PageFactory, it allows the Lazy Initialization of this WebElement when the page changes
+    // So I take advantage of that feature to create just one CheckoutPage instead of creating StepOneCheckoutPage and StepTwoCheckoutPage classes.
+    WebElement finishButton;
 
     public CheckoutPage(WebDriver driver) {
         this.driver = driver;
@@ -36,7 +40,6 @@ public class CheckoutPage {
         continueButton.click();
     }
     public CheckoutCompletePage finishCheckout() {
-        WebElement finishButton = driver.findElement(By.id("finish"));
         finishButton.click();
         return new CheckoutCompletePage(driver);
     }
