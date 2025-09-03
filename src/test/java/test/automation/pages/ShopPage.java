@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -13,10 +15,13 @@ public class ShopPage {
     List<WebElement> addToCartButtons;
     @FindBy(className = "shopping_cart_link")
     WebElement shoppingCartButton;
-    @FindBy(className="shopping_cart_badge")
+    @FindBy(className = "shopping_cart_badge")
     // I set it as a list because it allows me to check if the element is present on the page or not by checking if the list is empty.
     List<WebElement> shoppingCartBadge;
-
+    @FindBy(id = "react-burger-menu-btn")
+    WebElement burgerMenuButton;
+    @FindBy(id = "logout_sidebar_link")
+    WebElement logoutButton;
     ShopPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -32,7 +37,20 @@ public class ShopPage {
     public int getInventorySize(){
         return addToCartButtons.size();
     }
+    public ShopPage clickBurgerMenuButton(){
+        burgerMenuButton.click();
 
+        return this;
+    }
+    public LoginPage clickLogoutButton(){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOf(logoutButton));
+        logoutButton.click();
+        return new LoginPage(driver);
+    }
+    public LoginPage logout(){
+        return clickBurgerMenuButton().clickLogoutButton();
+    }
     public ShopPage clickAddToCartButton(int i) {
         addToCartButtons.get(i).click();
         return this;

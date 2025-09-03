@@ -40,7 +40,7 @@ public class SauceTests {
     }
 
     @Parameters({"firstName", "lastName", "postalCode"})
-    @Test(testName = "buy-flow")
+    @Test(testName = "Buy Flow")
     public void buyFlow(String firstName,  String lastName, String postalCode) {
         // TODO: Add waits
 //        loginPage.enterUserName(userName);
@@ -85,5 +85,8 @@ public class SauceTests {
                 .clickAddToCartButton(0);
         Assert.assertEquals(shopPage.getShoppingCartCount(), 0);
     }
-
+    @Test(testName = "Logout is working")
+    public void logout(){
+        Assert.assertTrue(shopPage.logout().isInLoginPage());
+    }
 }

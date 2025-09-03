@@ -5,9 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class LoginPage {
     private final WebDriver driver;
-
+    @FindBy(className = "login_container")
+    private List<WebElement> loginContainer;
     @FindBy(name = "user-name")
     private WebElement userName;
     @FindBy(name = "password")
@@ -19,7 +22,9 @@ public class LoginPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
+    public boolean isInLoginPage() {
+        return !loginContainer.isEmpty();
+    }
     public LoginPage enterUserName(String userName) {
         this.userName.sendKeys(userName);
         return this;
