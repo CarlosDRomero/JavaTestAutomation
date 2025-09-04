@@ -7,8 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CheckoutPage {
-    WebDriver driver;
+public class CheckoutPage extends BasePage {
     @FindBy(id = "first-name")
     WebElement firstName;
     @FindBy(id = "last-name")
@@ -23,8 +22,7 @@ public class CheckoutPage {
     WebElement finishButton;
 
     public CheckoutPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public CheckoutPage enterFirstName(String firstName) {

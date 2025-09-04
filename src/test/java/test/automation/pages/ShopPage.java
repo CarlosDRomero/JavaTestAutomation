@@ -9,8 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class ShopPage {
-    WebDriver driver;
+public class ShopPage extends BasePage {
     @FindBy(className = "btn_inventory")
     List<WebElement> addToCartButtons;
     @FindBy(className = "shopping_cart_link")
@@ -23,8 +22,7 @@ public class ShopPage {
     @FindBy(id = "logout_sidebar_link")
     WebElement logoutButton;
     ShopPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
     private WebElement getShoppingCartBadge() {
         return shoppingCartBadge.isEmpty() ? null : shoppingCartBadge.get(0);

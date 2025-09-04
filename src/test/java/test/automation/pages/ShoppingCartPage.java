@@ -5,13 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ShoppingCartPage {
-    WebDriver driver;
+public class ShoppingCartPage extends BasePage {
     @FindBy(id = "checkout")
     WebElement checkoutButton;
     public ShoppingCartPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
     public CheckoutPage clickCheckoutButton() {
         checkoutButton.click();

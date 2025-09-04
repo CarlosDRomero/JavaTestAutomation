@@ -5,15 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CheckoutCompletePage {
-    private WebDriver driver;
+public class CheckoutCompletePage extends BasePage {
     @FindBy(className = "complete-header")
     private WebElement completeHeader;
     @FindBy(id="back-to-products")
     private WebElement backToProducts;
     public CheckoutCompletePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
     public String getCompleteHeaderText() {
         return completeHeader.getText();

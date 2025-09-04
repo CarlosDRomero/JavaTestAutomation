@@ -7,8 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class LoginPage {
-    private final WebDriver driver;
+public class LoginPage extends BasePage {
     @FindBy(className = "login_container")
     private List<WebElement> loginContainer;
     @FindBy(name = "user-name")
@@ -19,8 +18,7 @@ public class LoginPage {
     private WebElement loginButton;
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
     public boolean isInLoginPage() {
         return !loginContainer.isEmpty();
