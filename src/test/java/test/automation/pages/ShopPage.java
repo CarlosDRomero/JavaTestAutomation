@@ -41,8 +41,7 @@ public class ShopPage extends BasePage {
         return this;
     }
     public LoginPage clickLogoutButton(){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOf(logoutButton));
+        waitForExpectedConditions(ExpectedConditions.visibilityOf(logoutButton));
         logoutButton.click();
         return new LoginPage(driver);
     }
