@@ -7,15 +7,10 @@
     <test name="Sauce Tests">
         <classes>
             <class name="test.automation.tests.SauceTests">
-                <methods>
-                    <include name="buyFlow">
-                        <parameter name="firstName"  value="Jose"/>
-                        <parameter name="lastName" value="Escamilla"/>
-                        <parameter name="postalCode" value="12345"/>
-                    </include>
-                    <include name="removeFromShoppingCart"/>
-                    <include name="logout"/>
-                </methods>
+                <parameter name="firstName"  value="Jose"/>
+                <parameter name="lastName" value="Escamilla"/>
+                <parameter name="postalCode" value="12345"/>
+                <parameter name="assertString" value="Thank you for your order!"/>
             </class>
         </classes>
     </test>
