@@ -1,51 +1,54 @@
 package test.automation.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CheckoutPage extends BasePage {
     @FindBy(id = "first-name")
-    WebElement firstName;
+    private WebElement firstName;
     @FindBy(id = "last-name")
-    WebElement lastName;
+    private WebElement lastName;
     @FindBy(id = "postal-code")
-    WebElement postalCode;
+    private WebElement postalCode;
     @FindBy(id = "continue")
-    WebElement continueButton;
+    private WebElement continueButton;
     @FindBy(id = "finish")
     // NOTE: Finish is at the Second Checkout Step page, but, because I'm using PageFactory, it allows the Lazy Initialization of this WebElement when the page changes
     // So I take advantage of that feature to create just one CheckoutPage instead of creating StepOneCheckoutPage and StepTwoCheckoutPage classes.
-    WebElement finishButton;
+    private WebElement finishButton;
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
 
     public CheckoutPage enterFirstName(String firstName) {
+        waitForVisibilityOf(this.firstName);
         this.firstName.sendKeys(firstName);
 
         return this;
     }
     public CheckoutPage enterLastName(String lastName) {
+        waitForVisibilityOf(this.lastName);
         this.lastName.sendKeys(lastName);
 
         return this;
     }
     public CheckoutPage enterPostalCode(String postalCode) {
+        waitForVisibilityOf(this.postalCode);
         this.postalCode.sendKeys(postalCode);
 
         return this;
     }
     public CheckoutPage clickContinueButton() {
+        waitForExpectedConditions(ExpectedConditions.visibilityOf(continueButton));
         continueButton.click();
 
         return this;
     }
     public CheckoutCompletePage finishCheckout() {
+        waitForExpectedConditions(ExpectedConditions.visibilityOf(finishButton));
         finishButton.click();
         return new CheckoutCompletePage(driver);
     }

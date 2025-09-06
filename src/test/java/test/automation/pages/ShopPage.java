@@ -11,16 +11,16 @@ import java.util.List;
 
 public class ShopPage extends BasePage {
     @FindBy(className = "btn_inventory")
-    List<WebElement> addToCartButtons;
+    private List<WebElement> addToCartButtons;
     @FindBy(className = "shopping_cart_link")
-    WebElement shoppingCartButton;
+    private WebElement shoppingCartButton;
     @FindBy(className = "shopping_cart_badge")
     // I set it as a list because it allows me to check if the element is present on the page or not by checking if the list is empty.
-    List<WebElement> shoppingCartBadge;
+    private List<WebElement> shoppingCartBadge;
     @FindBy(id = "react-burger-menu-btn")
-    WebElement burgerMenuButton;
+    private WebElement burgerMenuButton;
     @FindBy(id = "logout_sidebar_link")
-    WebElement logoutButton;
+    private WebElement logoutButton;
     ShopPage(WebDriver driver) {
         super(driver);
     }
@@ -33,20 +33,18 @@ public class ShopPage extends BasePage {
         return shoppingCartBadge==null? 0 : Integer.parseInt(shoppingCartBadge.getText());
     }
     public int getInventorySize(){
+        waitForVisibilityOf(shoppingCartButton);
         return addToCartButtons.size();
     }
     public ShopPage clickBurgerMenuButton(){
+        waitForVisibilityOf(burgerMenuButton);
         burgerMenuButton.click();
-
         return this;
     }
     public LoginPage clickLogoutButton(){
-        waitForExpectedConditions(ExpectedConditions.visibilityOf(logoutButton));
+        waitForVisibilityOf(logoutButton);
         logoutButton.click();
         return new LoginPage(driver);
-    }
-    public LoginPage logout(){
-        return clickBurgerMenuButton().clickLogoutButton();
     }
     public ShopPage clickAddToCartButton(int i) {
         addToCartButtons.get(i).click();
@@ -59,8 +57,12 @@ public class ShopPage extends BasePage {
 
 
     public ShoppingCartPage clickShoppingCartButton() {
+        waitForVisibilityOf(shoppingCartButton);
         shoppingCartButton.click();
         return new ShoppingCartPage(driver);
+    }
+    public LoginPage logout(){
+        return clickBurgerMenuButton().clickLogoutButton();
     }
 
 

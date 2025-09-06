@@ -12,6 +12,7 @@ public class ShoppingCartPage extends BasePage {
         super(driver);
     }
     public CheckoutPage clickCheckoutButton() {
+        waitForVisibilityOf(checkoutButton);
         checkoutButton.click();
         return new CheckoutPage(driver);
     }

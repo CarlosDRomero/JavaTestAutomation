@@ -39,36 +39,21 @@ public class SauceTests {
 
     }
 
-    @Parameters({"firstName", "lastName", "postalCode"})
+    @Parameters({"firstName", "lastName", "postalCode", "assertString"})
     @Test(testName = "Buy Flow")
-    public void buyFlow(String firstName,  String lastName, String postalCode) {
-        // TODO: Add waits
-//        loginPage.enterUserName(userName);
-//        loginPage.enterPassword(password);
-//        ShopPage shopPage = loginPage.clickLoginButton();
-//        shopPage.addRandomProduct();
-//        ShoppingCartPage shoppingCartPage = shopPage.clickShoppingCartButton();
-//        CheckoutPage checkoutPage = shoppingCartPage.clickCheckoutButton();
-//        checkoutPage.enterFirstName(firstName);
-//        checkoutPage.enterLastName(lastName);
-//        checkoutPage.enterPostalCode(postalCode);
-//        checkoutPage.clickContinueButton();
-//        CheckoutCompletePage checkoutCompletePage = checkoutPage.finishCheckout();
-//        Assert.assertTrue(checkoutCompletePage.getCompleteHeaderText().contains("Thank you for your order!"));
+    public void buyFlow(String firstName,  String lastName, String postalCode, String assertString) {
+        shopPage.addRandomProduct();
+        ShoppingCartPage shoppingCartPage = shopPage.clickShoppingCartButton();
 
-        CheckoutCompletePage checkoutCompletePage = shopPage.addRandomProduct()
-                .clickShoppingCartButton()
-                .clickCheckoutButton()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .enterPostalCode(postalCode)
-                .clickContinueButton()
-                .finishCheckout();
+        CheckoutPage checkoutPage = shoppingCartPage.clickCheckoutButton();
+        checkoutPage.enterFirstName(firstName);
+        checkoutPage.enterLastName(lastName);
+        checkoutPage.enterPostalCode(postalCode);
+        checkoutPage.clickContinueButton();
 
-        Assert.assertTrue(
-                checkoutCompletePage.getCompleteHeaderText().contains("Thank you for your order!")
-        );
+        CheckoutCompletePage checkoutCompletePage = checkoutPage.finishCheckout();
 
+        Assert.assertTrue(checkoutCompletePage.getCompleteHeaderText().contains(assertString));
     }
     @Test(testName = "Remove from shopping cart")
     public void removeFromShoppingCart() {
@@ -87,6 +72,7 @@ public class SauceTests {
     }
     @Test(testName = "Logout is working")
     public void logout(){
-        Assert.assertTrue(shopPage.logout().isInLoginPage());
+        LoginPage loginPage =  shopPage.logout();
+        Assert.assertTrue(loginPage.isInLoginPage());
     }
 }

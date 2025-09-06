@@ -24,14 +24,17 @@ public class LoginPage extends BasePage {
         return !loginContainer.isEmpty();
     }
     public LoginPage enterUserName(String userName) {
+        waitForVisibilityOf(this.userName);
         this.userName.sendKeys(userName);
         return this;
     }
     public LoginPage enterPassword(String password) {
+        waitForVisibilityOf(this.password);
         this.password.sendKeys(password);
         return this;
     }
     public ShopPage clickLoginButton() {
+        waitForVisibilityOf(loginButton);
         this.loginButton.click();
         return new ShopPage(driver);
     }

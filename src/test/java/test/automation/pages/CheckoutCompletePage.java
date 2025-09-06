@@ -3,7 +3,6 @@ package test.automation.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class CheckoutCompletePage extends BasePage {
     @FindBy(className = "complete-header")
@@ -14,9 +13,11 @@ public class CheckoutCompletePage extends BasePage {
         super(driver);
     }
     public String getCompleteHeaderText() {
+        waitForVisibilityOf(completeHeader);
         return completeHeader.getText();
     }
     public ShopPage clickBackToProducts() {
+        waitForVisibilityOf(backToProducts);
         backToProducts.click();
         return new ShopPage(driver);
     }
